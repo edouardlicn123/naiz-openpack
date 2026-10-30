@@ -1,0 +1,6 @@
+# 大体积镜像只进 Release 的 zip，不进 git 仓库：
+# - GitHub 拒绝 >100MB 文件，48MB FAT16 镜像每次改动都是全量 blob，git 存它纯浪费
+# - 基座制作完成后放到 tools_open/ 根目录（与 tools_commercial/base_msdos5_*.hdi 对应位置），
+#   make_openpack.sh 会自动把它打进 tools_open.zip，随 Release 分发
+tools_open/*.hdi
+tools_open/*.zip
