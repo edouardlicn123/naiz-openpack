@@ -23,6 +23,8 @@ directly into the main project's `tools_open/` directory):
 The main project's build scripts prefer `tools_open/` and fall back to `tools_commercial/` when it
 is missing; `--pack openpack` selects the open-source chain. Planning documents live in the Naiz
 project: `devdocs/178` (component replacement) and `devdocs/185` (dual-pipeline architecture).
+Background research (FreeDOS(98) sources, extender investigation) is in
+[docs/refdocs/](docs/refdocs/).
 
 ## The 10MB FreeDOS(98) base image in this pack
 
