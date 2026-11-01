@@ -1,37 +1,46 @@
 #!/bin/bash
-# naiz-openpack 打包脚本
-# 把 tools_open/ 打成 tools_open.zip（对应 Naiz 主项目的 tools_open/ 资源目录，
-# 角色等同于 naiz_cmpack 的 tools_commercial.zip）。
+# naiz-openpack packaging script
+# Packs tools_open/ into tools_open.zip (the tools_open/ asset directory of the
+# Naiz main project; it plays the same role as tools_commercial.zip in naiz_cmpack).
 #
-# 用法:
-#   ./make_openpack.sh                # 输出到 ~/tools_open.zip
-#   ./make_openpack.sh <输出路径.zip>  # 指定输出
+# Usage:
+#   ./make_openpack.sh                # writes to <repo>/tools_open.zip
+#   ./make_openpack.sh <output.zip>   # explicit output path
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
 SRC="$REPO_ROOT/tools_open"
-OUT="${1:-$HOME/tools_open.zip}"
+OUT="${1:-$REPO_ROOT/tools_open.zip}"
 
 if [ ! -d "$SRC/dos_system" ]; then
-    echo "错误: 找不到 $SRC/dos_system，请在仓库根目录运行" >&2
+    echo "Error: $SRC/dos_system not found; run this from the repository root" >&2
     exit 1
 fi
 if ! command -v zip >/dev/null 2>&1; then
-    echo "错误: 需要 zip 命令（sudo apt install zip）" >&2
+    echo "Error: the zip command is required (sudo apt install zip)" >&2
     exit 1
 fi
 
 mkdir -p "$(dirname "$OUT")"
 rm -f "$OUT"
-# zip 内保留 tools_open/ 顶层目录，与 tools_commercial.zip 解压行为一致
-(cd "$REPO_ROOT" && zip -r -q "$OUT" tools_open)
+# Keep the top-level tools_open/ directory inside the zip, matching how
+# tools_commercial.zip extracts.
+# Do not ship the 250MB reference base (e.g. if regenerated locally) in the
+# release package: the default base is the 10MB small image
+# (tools_open/base_freedos98_scsi_10m_clean.hdi); users who need a larger
+# image can generate one with make_base_hdi.py --size.
+# `-X` strips extended attributes (including access time); otherwise the same
+# content would get a different SHA256 on every run and could not match the
+# checksum registered in start.sh.
+(cd "$REPO_ROOT" && zip -r -q -X "$OUT" tools_open \
+    -x tools_open/base_freedos98_scsi_250m_clean.hdi)
 
-echo "===== 打包完成 ====="
+echo "===== Packaging complete ====="
 ls -l "$OUT"
 echo ""
 echo "SHA256:"
 sha256sum "$OUT"
 echo ""
-echo "后续步骤:"
-echo "  1. 到 https://github.com/edouardlicn123/naiz-openpack/releases/new 上传本文件"
-echo "  2. 把下载 URL 与上面的 SHA256 提供给 Naiz 主项目，写入 start.sh 下载清单"
+echo "Next steps:"
+echo "  1. Upload this file to https://github.com/edouardlicn123/naiz-openpack/releases/new"
+echo "  2. Give the download URL and the SHA256 above to the Naiz main project and add them to the start.sh download list"

@@ -15,6 +15,12 @@
 | `dos_system/EMM386.EXE` | tori emm386（2005/2/23，PC-98 专属） | `emm386_20050223.zip::emm386/BIN/EMM386.EXE` | 见 `emm386-tori/LICENSE.TXT` | http://retropc.net/tori/freedos/ |
 | `dos_system/MEM.EXE` | lpproj/mem.nec 1.11p1（PC98/IBM 兼用，2018/11/13） | `mem11p1-20181113.zip::bin/mem.exe` | GPL（`mem-nec98/license.txt`） | https://github.com/lpproj/mem.nec/releases |
 | `dos_system/CTMOUSE.COM` | CuteMouse 2.1b4（FreeDOS 1.4 仓库包） | `ctmouse.zip::BIN/CTMOUSE.EXE` **改名为 .COM**（DOS 按文件头 MZ 判别格式，与扩展名无关） | GPL v2（`ctmouse/COPYING-GPLv2`） | https://github.com/FDOS/mouse ・ https://sourceforge.net/projects/cutemouse/ |
+| `pc9821bios/BIOS.ROM` | PC-9821 BIOS ROM（96KB，来源 naiz_cmpack 的 `tools_commercial/pc9821bios/`） | `pc9821bios/BIOS.ROM` | NEC 版权固件，非开源；仅供本地使用 | — |
+| `pc9821bios/FONT.ROM` | PC-98 CGROM（汉字字形，288KB） | `pc9821bios/FONT.ROM` | NEC 版权固件，非开源 | — |
+| `pc9821bios/ITF.ROM` | PC-9821 附加固件（32KB，非启动必需） | `pc9821bios/ITF.ROM` | NEC 版权固件 | — |
+| `pc9821bios/SOUND.ROM` | 声卡固件（16KB） | `pc9821bios/SOUND.ROM` | NEC 版权固件 | — |
+| `pc9821bios/bios9821.rom` | PC-9821 BIOS 备用 dump（96KB，模拟器默认不用） | `pc9821bios/bios9821.rom` | NEC 版权固件 | — |
+| `licenses/dos32a/LICENSE.TXT` | DOS/32 Advanced DOS Extender（Narech K.，Open Watcom contrib `extender/dos32a`，v9.12） | `contrib/extender/dos32a/license.txt` | BSD 式许可（要求保留版权声明；终端文档需注明 "This product uses DOS/32 Advanced DOS Extender technology."） | https://github.com/open-watcom/open-watcom-v2 |
 
 ## 下载源镜像备注
 
@@ -27,6 +33,6 @@
 - MS-DOS 5.0 (NEC) 基座镜像与 IO.SYS/MSDOS.SYS
 - VEM486.EXE 内存管理器（荻野晃史，免费但闭源）
 - DOS4GW.EXE（Tenberry，商业）
-- PC-98 BIOS ROM（pc9821bios/）
+（`pc9821bios/` 的 ROM 虽非开源，但为方便开箱即用已随包分发，见上表）
 
 开源基座镜像 `base_freedos98_scsi_48m_clean.hdi` 制作完成（Naiz 主项目 devdoc 185 阶段 O2）后将放入 `tools_open/` 根目录，与 `tools_commercial/base_msdos5_scsi_48m_clean.hdi` 对应。

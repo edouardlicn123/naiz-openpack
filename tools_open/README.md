@@ -6,8 +6,9 @@
 ```
 tools_open/
 ├── dos_system/            ← 对应 tools_commercial/dos_system/（开源 DOS 链文件）
+├── pc9821bios/            ← PC-9821 的 BIOS/CGROM ROM（版权归 NEC，见注意事项）
 ├── licenses/              ← 每个组件的许可全文与来源对照（SOURCES.md）
-└── base_freedos98_scsi_48m_clean.hdi   ← （未来）开源基座镜像，对应
+└── base_freedos98_scsi_10m_clean.hdi   ← 开源基座镜像（10MB），对应
                                             tools_commercial/base_msdos5_scsi_48m_clean.hdi
 ```
 
@@ -23,6 +24,7 @@ tools_open/
 
 ## 注意事项
 
-- 本包所有内容均为可再分发的开源/自由软件；闭源组件（MS-DOS、VEM486、DOS4GW、BIOS ROM）不在包内
+- 除 `pc9821bios/` 中的 NEC 固件 ROM 外，本包内容均为可再分的开源/自由软件；闭源组件（MS-DOS、VEM486、DOS4GW）不在包内
+- `pc9821bios/` 提供 `BIOS.ROM`、`FONT.ROM`（启动与显示必需，已实测仅此两份即可启动）以及可选的 `ITF.ROM`、`SOUND.ROM`；这些 ROM 版权归 NEC，仅供本地使用，公开发布需自行承担版权责任
 - `dos_system/` 内含两套内核：`KERNEL.SYS`（lpproj 合并版，默认）与 `KERNEL35A.SYS`（tori 2035a，对照测试用）；两套 XMS：`FDXMS.SYS`（tori）与 `HIMEMX.EXE`（lpproj）——基座镜像 CONFIG.SYS 按测试结论选择
 - `CTMOUSE.COM` 上游文件名为 `CTMOUSE.EXE`，改名为 .COM 不影响执行（DOS 按 MZ 头判别格式）

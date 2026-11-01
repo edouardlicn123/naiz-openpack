@@ -4,3 +4,10 @@
 #   make_openpack.sh 会自动把它打进 tools_open.zip，随 Release 分发
 tools_open/*.hdi
 tools_open/*.zip
+# Release package produced by make_openpack.sh in the repository root
+tools_open.zip
+# 10MB 小基座是默认基座，体积可接受，直接纳入 git 以便 clone 即用：
+!tools_open/base_freedos98_scsi_10m_clean.hdi
+# make_base_hdi.py 的默认输出目录（生成物不进 git）
+build/
+__pycache__/
